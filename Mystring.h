@@ -2,15 +2,17 @@
 class Mystring{
 	char* str;
 public:
-	Mystring();
-	Mystring(const char* s);
-	Mystring(const Mystring& source);
-	~Mystring();
-	Mystring& operator=(const Mystring& rhs);
-	Mystring operator+(const Mystring& rhs);
-	void display() const;
+	Mystring(); // no-org constructor
+	Mystring(const char* s); // overloaded constructor
+	Mystring(const Mystring& source); // copy constructor
+	~Mystring(); // destructor
+	Mystring& operator=(const Mystring& rhs); // copy assignment
+	Mystring& operator=(Mystring&& rhs); // move assignment
+	Mystring operator+(const Mystring& rhs) const; // concatenate
+	Mystring operator-() const; // make lowrecase 
+	bool operator==(const Mystring& rhs) const; // is_equal
+	void display() const; //  Print str and lenght
 	int get_length() const;
 	const char* get_str() const;
-	void set_name(const char* a);
 };
 

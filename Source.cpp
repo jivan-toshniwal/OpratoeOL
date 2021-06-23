@@ -3,16 +3,24 @@
 #include "Mystring.h"
 
 int main() {
-	Mystring move;
-	Mystring larry("Larry");
-	Mystring stooge{"Stooge"};
-	
-	move.display();
-	larry.display();
-	stooge.display();
+	std::cout << std::boolalpha << std::endl;
 
-	move = larry + stooge;
-	move.display();
+	Mystring larry{ "LARRY" };
+	Mystring moe{ "Moe" };
+	Mystring stooge = larry;
+	larry.display();
+	moe.display();
+	std::cout << (larry == moe) << std::endl;
+	std::cout << (larry == stooge) << std::endl;
+	Mystring larry2 = -larry;
+	larry2.display();
+	Mystring stooges = stooge + "larry" + moe; // compilar error
+	stooges.display();
+	Mystring two_stooges = moe + " " + "larry";
+	two_stooges.display();
+	Mystring three_stooges = moe + " " + larry + " " + stooge;
+	three_stooges.display();
+
 
 	return 0;
 }
