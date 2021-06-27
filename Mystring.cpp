@@ -17,12 +17,12 @@ Mystring::Mystring(const char* s)
 }
 
 
-bool Mystring::operator==(const Mystring& rhs) {
-	return (std::strcmp(this->str, rhs.str) == 0);
+bool operator==(const Mystring& lhs,const Mystring& rhs) {
+	return (std::strcmp(lhs.str, rhs.str) == 0);
 }
 
-bool Mystring::operator!=(const Mystring& rhs) {
-	return !(std::strcmp(this->str, rhs.str) == 0);
+bool operator!=(const Mystring& lhs,const Mystring& rhs) {
+	return !(std::strcmp(lhs.str, rhs.str) == 0);
 }
 
 Mystring& Mystring::operator=(const Mystring& rhs) {
@@ -66,12 +66,20 @@ Mystring::Mystring(Mystring&& s) {
 	s.str = nullptr;
 }
 
-Mystring Mystring::operator-() const{
-	for (int i = 0; i < strlen(str); i++)
-		str[i] = tolower(str[i]);
-	Mystring temp{ str };
+//Mystring Mystring::operator-() const{
+//	for (int i = 0; i < strlen(str); i++)
+//		str[i] = tolower(str[i]);
+//	Mystring temp{ str };
+//	return temp;
+//}
+
+Mystring operator-(Mystring& obj) {
+	for (int i = 0; i < strlen(obj.str); i++)
+		obj.str[i] = tolower(obj.str[i]);
+	Mystring temp{ obj.str };
 	return temp;
 }
+
 
 std::ostream& operator<<(std::ostream& os, const Mystring& rhs) {
 	os << rhs.str;
@@ -94,14 +102,9 @@ Mystring& Mystring::operator+=(const Mystring& rhs) {
 }
 
 Mystring Mystring::operator*(int a) {
-	int x = (strlen(this->str) * a) + 1;
-	char* buff = new char[x];
-	strcpy_s(buff, x, this->str);
-	for (int i = 1; i < a; i++) {
-		strcat_s(buff, x, this->str);
-	}
-	Mystring temp{ buff };
-	delete[] buff;
+	Mystring temp;
+	for (int i = 0; i < a; i++)
+		temp += *this;
 	return temp;
 }
 
@@ -118,13 +121,20 @@ Mystring& operator*=(Mystring& lhs, const int a) {
 Mystring Mystring::operator++() const{
 	for (int i = 0; i < strlen(str); i++)
 		str[i] = toupper(str[i]);
-	Mystring temp{ str };
-	return temp;
+	return *this;
 }
 
 Mystring Mystring::operator++(int){
 	Mystring temp{ str };
-	for (int i = 0; i < strlen(str); i++)
-		str[i] = toupper(str[i]);
+	operator++();
 	return temp;
 }
+
+std::istream& operator>>(std::istream& in, Mystring& rhs) {
+	char* buff = new char[1000];
+	in >> buff;
+	rhs = Mystring{ buff };
+	delete[] buff;
+	return in;
+}
+

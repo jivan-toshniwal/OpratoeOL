@@ -13,8 +13,8 @@ public:
 	~Mystring() {
 		delete[] str;
 	}
-	bool operator==(const Mystring& rhs);
-	bool operator!=(const Mystring& rhs);
+	friend bool operator==(const Mystring& lhs,const Mystring& rhs);
+	friend bool operator!=(const Mystring& lhs,const Mystring& rhs);
 
 	Mystring& operator=(const Mystring& rhs);
 	Mystring& operator=(Mystring&& rhs);
@@ -22,7 +22,7 @@ public:
 	bool operator<(const Mystring& rhs);
 	bool operator>(const Mystring& rhs);
 
-	Mystring operator-() const;
+	friend Mystring operator-(Mystring& obj);
 
 	Mystring(const Mystring& s);
 	Mystring(Mystring&& s);
@@ -35,6 +35,8 @@ public:
 	friend Mystring& operator*=(Mystring& lhs, const int a);
 	Mystring operator++() const;
 	Mystring operator++(int);
+
+	friend std::istream& operator>>(std::istream& in, Mystring& rhs);
 
 
 

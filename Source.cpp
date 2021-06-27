@@ -3,7 +3,6 @@
 
 int main() {
 	std::cout << std::boolalpha << std:: endl;
-
 	Mystring a{ "frank" };
 	Mystring b("frank");
 
@@ -55,6 +54,30 @@ int main() {
 	result = s++;
 	std::cout << s << std::endl;
 	std::cout << result << std::endl;
+
+	Mystring repeat_string;
+	int repeat_time;
+	std::cout << "Enter a string to repeat: " << std::endl;
+	std::cin >> repeat_string;
+
+	//std::cout << repeat_string << std::endl;
+	std::cout << "How many times woud you like to repeated it? \n";
+	std::cin >> repeat_time;
+
+	repeat_string *= repeat_time;
+
+	std::cout << "The resulting string is: " << repeat_string << std::endl;
+
+	std::cout << (repeat_string * 12) << std::endl;
+
+	repeat_string = "RepeatMe";
+	std::cout << (repeat_string + repeat_string + repeat_string) << std::endl;
+
+	repeat_string += (repeat_string * 3);
+	std::cout << repeat_string << std::endl;
+
+	repeat_string = "RepeatMe";
+	repeat_string += (repeat_string + repeat_string + repeat_string);
 
 	std::cin.get();
 	return 0;
